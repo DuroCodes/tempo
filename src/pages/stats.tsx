@@ -1,6 +1,6 @@
 import Link from "next/link";
 import Image from "next/image";
-import { GetServerSidePropsContext } from "next";
+import type { GetServerSidePropsContext } from "next";
 import { getSession, useSession } from "next-auth/react";
 import { Card, CardHeader } from "~/components/ui/card";
 import {
@@ -10,7 +10,7 @@ import {
   CarouselNext,
   CarouselPrevious,
 } from "~/components/ui/carousel";
-import { SpotifyTrack, uriToUrl } from "~/utils/spotify";
+import { type SpotifyTrack, uriToUrl } from "~/utils/spotify";
 import { buttonVariants } from "~/components/ui/button";
 
 function GenreShowcase({ genres }: { genres: string[] }) {
@@ -21,6 +21,7 @@ function GenreShowcase({ genres }: { genres: string[] }) {
           <Link
             href={`https://open.spotify.com/search/${genre.replace(/ /g, "%20")}`}
             className={buttonVariants({ variant: "secondary" })}
+            key={genre}
           >
             {genre}
           </Link>
@@ -39,7 +40,7 @@ export function TrackCarousel({ tracks }: { tracks: SpotifyTrack[] }) {
       className="w-3/4 md:w-11/12"
     >
       <CarouselContent>
-        {tracks!.map((track) => (
+        {tracks.map((track) => (
           <CarouselItem key={track.id} className="basis-1/2 lg:basis-1/5">
             <div className="h-full">
               <TrackCard track={track} />
@@ -150,7 +151,7 @@ export default function Stats() {
 export async function getServerSideProps(context: GetServerSidePropsContext) {
   const session = await getSession(context);
 
-  if (!session || !session?.user.spotify || !session?.user.spotify.ok) {
+  if (!session?.user.spotify.ok) {
     return {
       redirect: {
         destination: "/",

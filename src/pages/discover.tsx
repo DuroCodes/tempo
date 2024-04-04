@@ -1,4 +1,4 @@
-import { GetServerSidePropsContext } from "next";
+import type { GetServerSidePropsContext } from "next";
 import { getSession, useSession } from "next-auth/react";
 import { TrackCarousel } from "./stats";
 
@@ -55,7 +55,7 @@ export default function Discover() {
 export async function getServerSideProps(context: GetServerSidePropsContext) {
   const session = await getSession(context);
 
-  if (!session || !session?.user.spotify || !session?.user.spotify.ok) {
+  if (!session?.user.spotify.ok) {
     return {
       redirect: {
         destination: "/",

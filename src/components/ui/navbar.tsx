@@ -4,7 +4,7 @@ import { IoSparkles } from "react-icons/io5";
 import { Avatar, AvatarImage } from "./avatar";
 import { signOut, useSession } from "next-auth/react";
 import { AvatarFallback } from "@radix-ui/react-avatar";
-import { Session } from "next-auth";
+import type { Session } from "next-auth";
 import {
   Popover,
   PopoverContent,

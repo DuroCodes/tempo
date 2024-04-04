@@ -45,7 +45,7 @@ export const RecommendationsSchema = z.object({
 });
 
 export const uriToUrl = (uri: string) => {
-  const [_, type, id] = uri.split(":");
+  const [, type, id] = uri.split(":");
   return `https://open.spotify.com/${type}/${id}`;
 };
 
@@ -61,14 +61,12 @@ const zodFetch = async <TSchema extends z.Schema>(
     return Err(error);
   }
 
-  const json = await res.json();
+  const json = (await res.json()) as unknown;
   const parsed = schema.safeParse(json);
 
   if (!parsed.success) {
     console.error(
-      parsed.error.issues
-        .map((i) => `${i.code} | ${i.message} ${i.path}`)
-        .join("\n"),
+      parsed.error.issues.map((i) => `${i.code} | ${i.message}`).join("\n"),
     );
     return Err(error);
   }
