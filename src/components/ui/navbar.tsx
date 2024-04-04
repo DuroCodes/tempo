@@ -33,20 +33,27 @@ function AvatarButton({ session }: { session: Session }) {
             </div>
             <Separator />
             <div className="grid gap-2 font-medium text-zinc-50">
-              <div className="flex items-center gap-2 hover:text-zinc-300">
+              <Link
+                href="/stats"
+                className="flex items-center gap-2 hover:text-zinc-300"
+              >
                 <FaChartLine />
-                <Link href="/stats">Stats</Link>
-              </div>
-              <div className="flex items-center gap-2 hover:text-zinc-300">
+                Stats
+              </Link>
+              <Link
+                href="/discover"
+                className="flex items-center gap-2 hover:text-zinc-300"
+              >
                 <IoSparkles />
-                <Link href="/discover">Discover</Link>
-              </div>
-              <div className="flex items-center gap-2 text-primary hover:text-primary/80">
+                Discover
+              </Link>
+              <Link
+                href="https://www.youtube.com/watch?v=dQw4w9WgXcQ"
+                className="flex items-center gap-2 text-primary hover:text-primary/80"
+              >
                 <FaCrown />
-                <Link href="https://www.youtube.com/watch?v=dQw4w9WgXcQ">
-                  Premium
-                </Link>
-              </div>
+                Premium
+              </Link>
               <Separator />
               <Button onClick={() => signOut()} className="gap-2">
                 <FaSignOutAlt /> Logout

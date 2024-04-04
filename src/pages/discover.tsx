@@ -1,6 +1,8 @@
 import { useSession } from "next-auth/react";
-import { getServerSession } from 'next-auth'
+import { getServerSession } from "next-auth";
 import { TrackCarousel } from "./stats";
+import { authOptions } from "~/server/auth";
+import { GetServerSidePropsContext } from "next";
 
 export default function Discover() {
   const { data: sessionData } = useSession();
@@ -52,8 +54,8 @@ export default function Discover() {
   );
 }
 
-export async function getServerSideProps() {
-  const session = await getServerSession();
+export async function getServerSideProps(ctx: GetServerSidePropsContext) {
+  const session = await getServerSession(ctx.req, ctx.res, authOptions);
 
   if (!session?.user.spotify.ok) {
     return {

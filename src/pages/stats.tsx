@@ -11,7 +11,9 @@ import {
 } from "~/components/ui/carousel";
 import { type SpotifyTrack, uriToUrl } from "~/utils/spotify";
 import { buttonVariants } from "~/components/ui/button";
-import { getServerSession } from "next-auth";
+import { getServerSession } from "next-auth/next";
+import { GetServerSidePropsContext } from "next";
+import { authOptions } from "~/server/auth";
 
 function GenreShowcase({ genres }: { genres: string[] }) {
   return (
@@ -148,8 +150,8 @@ export default function Stats() {
   );
 }
 
-export async function getServerSideProps() {
-  const session = await getServerSession();
+export async function getServerSideProps(ctx: GetServerSidePropsContext) {
+  const session = await getServerSession(ctx.req, ctx.res, authOptions);
 
   if (!session?.user.spotify.ok) {
     return {
