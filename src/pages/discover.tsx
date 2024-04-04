@@ -54,6 +54,7 @@ export default function Discover() {
 
 export async function getServerSideProps(context: GetServerSidePropsContext) {
   const session = await getSession(context);
+  console.log(session);
 
   if (!session?.user.spotify.ok) {
     return {
