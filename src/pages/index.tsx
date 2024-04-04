@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { FaSpotify } from "react-icons/fa";
+import { FaGithub, FaSpotify } from "react-icons/fa";
 import { signIn, signOut, useSession } from "next-auth/react";
 import { Button, buttonVariants } from "~/components/ui/button";
 
@@ -35,16 +35,17 @@ export default function Home() {
                 onClick={
                   sessionData ? () => signOut() : () => signIn("spotify")
                 }
-                className="flex items-center gap-2"
+                className="gap-2"
               >
                 <FaSpotify />
                 {sessionData ? "Log Out" : "Login with Spotify"}
               </Button>
               <Link
-                className={buttonVariants({ variant: "outline", size: "lg" })}
-                href="/about"
+                className={`${buttonVariants({ variant: "outline", size: "lg" })} gap-2`}
+                href="https://github.com/durocodes/tempo"
               >
-                Learn More
+                <FaGithub />
+                Source Code
               </Link>
             </div>
           </div>
