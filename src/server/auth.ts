@@ -52,6 +52,9 @@ export const authOptions: NextAuthOptions = {
         "https://accounts.spotify.com/authorize?scope=user-read-email+user-read-recently-played+user-top-read",
     }),
   ],
+  session: {
+    maxAge: 60 * 60,
+  },
 };
 
 export const getServerAuthSession = (ctx: {
