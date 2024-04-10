@@ -19,7 +19,7 @@ function AvatarButton({ session }: { session: Session }) {
       <Popover>
         <PopoverTrigger>
           <Avatar className="border-2 border-primary">
-            <AvatarImage src={session.user.image!} alt="Profile Picture" />
+            <AvatarImage src={session.user.image ?? "default.jpg"} alt="Profile Picture" />
             <AvatarFallback>{session.user.name![0]}</AvatarFallback>
           </Avatar>
         </PopoverTrigger>

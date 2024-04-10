@@ -129,7 +129,7 @@ export const topGenres = async (
     data.value.genres.forEach((g) => genres.add(g));
   }
 
-  return [...genres];
+  return [...genres].slice(0, 8);
 };
 
 export const recommendations = async (
